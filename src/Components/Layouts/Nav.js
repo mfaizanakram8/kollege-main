@@ -11,6 +11,9 @@ import { PiStudent, PiUser, PiBooks } from "react-icons/pi";
 
 const Nav = () => {
   const { user } = useContext(UserContext);
+  
+  if (!user) return null;
+
   return (
     <nav
       id="nav"
@@ -53,6 +56,12 @@ const Nav = () => {
               <li className="flex gap-2 duration-200 rounded-md px-4 py-2 hover:bg-violet-600/40 ">
                 <RiUserAddLine className="pt-[0.1rem] text-2xl  " />
                 Approve Staff
+              </li>
+            </NavLink>
+            <NavLink to={"./approve_student"} className="w-full font-medium">
+              <li className="flex gap-2 rounded-md px-4 py-2 hover:bg-violet-600/40">
+                <PiStudent className="pt-[0.1rem] text-2xl" />
+                Approve Students
               </li>
             </NavLink>
           </>

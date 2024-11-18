@@ -28,10 +28,14 @@ const StaffForm = () => {
   const addStaff = async (e) => {
     e.preventDefault();
     try {
-      const reqData = JSON.stringify(staff);
-      const response = await axios.post("staff/ ", reqData);
+      const reqData = {
+        ...staff,
+        department: "cs",
+        role: ""
+      };
+      const response = await axios.post("staff", reqData);
+      toast.success("Registration successful! Waiting for HOD approval.");
       navigate("/");
-      toast.success(response.data.message);
     } catch (err) {
       setError(err);
     }

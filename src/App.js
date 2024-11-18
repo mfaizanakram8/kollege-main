@@ -40,6 +40,7 @@ const StaffApproval = lazy(() =>
 );
 const PaperForm = lazy(() => import("./Components/Forms/PaperForm"));
 const JoinPaper = lazy(() => import("./Components/Forms/JoinPaper"));
+const StudentApproval = lazy(() => import("./Components/Queries/StudentApproval"));
 
 function App() {
   const router = createBrowserRouter(
@@ -86,6 +87,14 @@ function App() {
             element={
               <Suspense fallback={<Loading />}>
                 <JoinPaper />
+              </Suspense>
+            }
+          />
+          <Route
+            path="approve_student"
+            element={
+              <Suspense fallback={<Loading />}>
+                <StudentApproval />
               </Suspense>
             }
           />

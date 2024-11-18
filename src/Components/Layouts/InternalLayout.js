@@ -12,15 +12,15 @@ const InternalLayout = () => {
   const { user } = React.useContext(UserContext);
   return (
     <>
-      {user.userType === "student" ? (
+      {user.role === "student" ? (
         <React.Suspense fallback={<Loading />}>
           <InternalStudent />
         </React.Suspense>
-      ) : (
+      ) : (user.role === "HOD" || user.role === "teacher") ? (
         <React.Suspense fallback={<Loading />}>
           <InternalResultForm />
         </React.Suspense>
-      )}
+      ) : null}
     </>
   );
 };

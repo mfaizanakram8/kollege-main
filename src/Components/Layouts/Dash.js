@@ -27,44 +27,48 @@ const Dash = () => {
         Faizan
       </h2>
       <div className="grid grid-cols-1 place-content-center gap-3 px-1 py-4 lg:grid-cols-2 lg:gap-4 lg:px-8 xl:grid-cols-3">
-        <Link
-          className="flex gap-2 rounded-lg bg-violet-300 p-6 text-base hover:bg-violet-400/90 dark:bg-violet-950/80 dark:hover:bg-violet-950 dark:hover:text-slate-300 duration-200 lg:text-lg"
-          to={"./paper"}
-        >
-          <GiBookshelf className="text-[2.5rem] lg:text-[4rem] " />
-          <div className="font-semibold">
-            Papers
-            <p className="text-sm font-normal lg:text-base ">
-              View Papers and Notes
-            </p>
-          </div>
-        </Link>
+        {(user.role === "HOD" || user.role === "teacher") && (
+          <>
+            <Link
+              className="flex gap-2 rounded-lg bg-violet-300 p-6 text-base hover:bg-violet-400/90 dark:bg-violet-950/80 dark:hover:bg-violet-950 dark:hover:text-slate-300 duration-200 lg:text-lg"
+              to={"./paper"}
+            >
+              <GiBookshelf className="text-[2.5rem] lg:text-[4rem] " />
+              <div className="font-semibold">
+                Papers
+                <p className="text-sm font-normal lg:text-base ">
+                  View Papers and Students
+                </p>
+              </div>
+            </Link>
 
-        <Link
-          className="flex gap-2 rounded-lg bg-violet-300 p-6 text-base hover:bg-violet-400/90 dark:bg-violet-950/80 dark:hover:bg-violet-950 dark:hover:text-slate-300 duration-200 lg:text-lg"
-          to={"./attendance"}
-        >
-          <IoCalendarOutline className="text-[2.5rem] lg:text-[4rem] " />
-          <div className="font-semibold">
-            Attendance
-            <p className="text-sm font-normal lg:text-base ">
-              Add or Edit Attendance
-            </p>
-          </div>
-        </Link>
+            <Link
+              className="flex gap-2 rounded-lg bg-violet-300 p-6 text-base hover:bg-violet-400/90 dark:bg-violet-950/80 dark:hover:bg-violet-950 dark:hover:text-slate-300 duration-200 lg:text-lg"
+              to={"./attendance"}
+            >
+              <IoCalendarOutline className="text-[2.5rem] lg:text-[4rem] " />
+              <div className="font-semibold">
+                Attendance
+                <p className="text-sm font-normal lg:text-base ">
+                  Manage Attendance
+                </p>
+              </div>
+            </Link>
 
-        <Link
-          className="flex gap-2 rounded-lg bg-violet-300 p-6 text-base hover:bg-violet-400/90 dark:bg-violet-950/80 dark:hover:bg-violet-950 dark:hover:text-slate-300 duration-200 lg:text-lg"
-          to={"./internal"}
-        >
-          <HiOutlineDocumentReport className="text-[2.5rem] lg:text-[4rem] " />
-          <div className="font-semibold">
-            Internal Mark
-            <p className="text-sm font-normal lg:text-base ">
-              View or Edit Internal Marks
-            </p>
-          </div>
-        </Link>
+            <Link
+              className="flex gap-2 rounded-lg bg-violet-300 p-6 text-base hover:bg-violet-400/90 dark:bg-violet-950/80 dark:hover:bg-violet-950 dark:hover:text-slate-300 duration-200 lg:text-lg"
+              to={"./internal"}
+            >
+              <HiOutlineDocumentReport className="text-[2.5rem] lg:text-[4rem] " />
+              <div className="font-semibold">
+                Internal Marks
+                <p className="text-sm font-normal lg:text-base ">
+                  Manage Internal Marks
+                </p>
+              </div>
+            </Link>
+          </>
+        )}
 
         <Link
           className="flex gap-2 rounded-lg bg-violet-300 p-6 text-base hover:bg-violet-400/90 dark:bg-violet-950/80 dark:hover:bg-violet-950 dark:hover:text-slate-300 duration-200 lg:text-lg"
@@ -106,21 +110,75 @@ const Dash = () => {
                 </p>
               </div>
             </Link>
+
+            <Link
+              className="flex gap-2 rounded-lg bg-violet-300 p-6 text-base hover:bg-violet-400/90 dark:bg-violet-950/80 dark:hover:bg-violet-950 dark:hover:text-slate-300 duration-200 lg:text-lg"
+              to={"./approve_student"}
+            >
+              <PiStudent className="text-[2.5rem] lg:text-[4rem] " />
+              <div className="font-semibold">
+                Approve Students
+                <p className="text-sm font-normal lg:text-base ">
+                  Approve registered student(s)
+                </p>
+              </div>
+            </Link>
           </>
         )}
         {user.role === "student" && (
-          <Link
-            className="flex gap-2 rounded-lg bg-violet-300 p-6 text-base hover:bg-violet-400/90 dark:bg-violet-950/80 dark:hover:bg-violet-950 dark:hover:text-slate-300 duration-200 lg:text-lg"
-            to={"./join_paper"}
-          >
-            <PiBooks className="text-[2.5rem] lg:text-[4rem] " />
-            <div className="font-semibold">
-              Manage Paper
-              <p className="text-sm font-normal lg:text-base ">
-                Join or Leave Paper
-              </p>
-            </div>
-          </Link>
+          <>
+            <Link
+              className="flex gap-2 rounded-lg bg-violet-300 p-6 text-base hover:bg-violet-400/90 dark:bg-violet-950/80 dark:hover:bg-violet-950 dark:hover:text-slate-300 duration-200 lg:text-lg"
+              to={"./paper"}
+            >
+              <GiBookshelf className="text-[2.5rem] lg:text-[4rem] " />
+              <div className="font-semibold">
+                Papers
+                <p className="text-sm font-normal lg:text-base">
+                  View Papers and Notes
+                </p>
+              </div>
+            </Link>
+
+            <Link
+              className="flex gap-2 rounded-lg bg-violet-300 p-6 text-base hover:bg-violet-400/90 dark:bg-violet-950/80 dark:hover:bg-violet-950 dark:hover:text-slate-300 duration-200 lg:text-lg"
+              to={"./attendance"}
+            >
+              <IoCalendarOutline className="text-[2.5rem] lg:text-[4rem] " />
+              <div className="font-semibold">
+                Attendance
+                <p className="text-sm font-normal lg:text-base">
+                  View Attendance
+                </p>
+              </div>
+            </Link>
+
+            <Link
+              className="flex gap-2 rounded-lg bg-violet-300 p-6 text-base hover:bg-violet-400/90 dark:bg-violet-950/80 dark:hover:bg-violet-950 dark:hover:text-slate-300 duration-200 lg:text-lg"
+              to={"./internal"}
+            >
+              <HiOutlineDocumentReport className="text-[2.5rem] lg:text-[4rem] " />
+              <div className="font-semibold">
+                Internal Marks
+                <p className="text-sm font-normal lg:text-base">
+                  View Internal Marks
+                </p>
+              </div>
+            </Link>
+
+            <Link
+              className="flex gap-2 rounded-lg bg-violet-300 p-6 text-base hover:bg-violet-400/90 dark:bg-violet-950/80 dark:hover:bg-violet-950 dark:hover:text-slate-300 duration-200 lg:text-lg"
+              to={"./join_paper"}
+            >
+              <PiBooks className="text-[2.5rem] lg:text-[4rem] " />
+              <div className="font-semibold">
+                Manage Paper
+                <p className="text-sm font-normal lg:text-base">
+                  Join or Leave Paper
+                </p>
+              </div>
+            </Link>
+          </>
         )}
         <Link
           className="flex gap-2 rounded-lg bg-violet-300 p-6 text-base hover:bg-violet-400/90 dark:bg-violet-950/80 dark:hover:bg-violet-950 dark:hover:text-slate-300 duration-200 lg:text-lg"

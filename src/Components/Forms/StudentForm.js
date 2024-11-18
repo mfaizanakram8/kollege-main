@@ -10,8 +10,10 @@ const StudentForm = () => {
     name: "",
     email: "",
     course: "",
+    department: "cs",
     username: "",
     password: "",
+    approved: false
   });
   const [error, setError] = useState("");
 
@@ -25,11 +27,22 @@ const StudentForm = () => {
   const addStudent = async (e) => {
     e.preventDefault();
     try {
-      const reqData = JSON.stringify(student);
+      const reqData = {
+        name: student.name,
+        email: student.email,
+        course: student.course,
+        username: student.username,
+        password: student.password,
+        department: "cs",
+        approved: false
+      };
+      console.log("Sending student data:", reqData);
       const response = await axios.post("student", reqData);
+      console.log("Registration response:", response);
+      toast.success("Registration successful! Waiting for HOD approval.");
       navigate("/");
-      toast.success(response.data.message);
     } catch (err) {
+      console.error("Registration error:", err);
       setError(err);
     }
   };

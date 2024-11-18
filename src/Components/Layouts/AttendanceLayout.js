@@ -8,15 +8,15 @@ const AttendanceLayout = () => {
   const { user } = useContext(UserContext);
   return (
     <>
-      {user.userType === "student" ? (
+      {user.role === "student" ? (
         <Suspense fallback={<Loading />}>
           <AttendanceStudent />
         </Suspense>
-      ) : (
+      ) : (user.role === "HOD" || user.role === "teacher") ? (
         <Suspense fallback={<Loading />}>
           <Attendance />
         </Suspense>
-      )}
+      ) : null}
     </>
   );
 };

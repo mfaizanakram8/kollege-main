@@ -6,6 +6,7 @@ import { FaUniversity } from "react-icons/fa";
 import { PiStudentThin, PiUserThin, PiSpinnerGapBold } from "react-icons/pi";
 import CircleDesign from "../Layouts/CircleDesign";
 import ErrorStrip from "../ErrorStrip";
+import { toast } from "react-toastify";
 
 const Login = () => {
   const navigate = useNavigate();
@@ -25,31 +26,22 @@ const Login = () => {
     }, 4000);
   };
 
-  const handleLogin = async (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    if (userType === "") {
-      setError({
-        response: {
-          data: "Select User Type",
-        },
-      });
-    } else {
-      setButtonText("Loading...");
+    try {
+      setButtonText("Connecting...");
       slowLoadingIndicator();
-      try {
-        const response = await axios.post("/auth/login/" + userType, {
-          username,
-          password,
-        });
-        await setUser({ ...response.data, userType });
-        localStorage.setItem(
-          "userDetails",
-          JSON.stringify({ ...response.data, userType })
-        );
-      } catch (err) {
-        setError(err);
-        setButtonText("Login");
-      }
+      const response = await axios.post(
+        `auth/login/${userType}`,
+        JSON.stringify({ username, password })
+      );
+      setUser(response.data);
+      localStorage.setItem("userDetails", JSON.stringify(response.data));
+      toast.success("Login Successful");
+      navigate("/dash");
+    } catch (err) {
+      setButtonText("Login");
+      setError(err);
     }
   };
 
@@ -82,7 +74,7 @@ const Login = () => {
           <section className="z-0 w-[65%] justify-self-center rounded-lg bg-slate-100 opacity-80 hover:opacity-100 focus:opacity-100 duration-200 dark:bg-[#060913] sm:w-[min(50%,360px)] md:w-[min(40%,360px)] xl:w-[min(23%,360px)] ">
             <form
               className="tracking-wide placeholder:text-slate-200 dark:placeholder:text-violet-200 "
-              onSubmit={(e) => handleLogin(e)}
+              onSubmit={(e) => handleSubmit(e)}
             >
               <section className="flex flex-col items-center justify-start ">
                 <div className="flex w-full text-lg ">
@@ -154,7 +146,7 @@ const Login = () => {
                   type="submit"
                   value="Login"
                   disabled={buttonText !== "Login"}
-                  onClick={(e) => handleLogin(e)}
+                  onClick={(e) => handleSubmit(e)}
                   >
                   {!(buttonText === "Login") && (
                     <PiSpinnerGapBold className="animate-spin" />
